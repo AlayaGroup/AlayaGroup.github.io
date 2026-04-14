@@ -750,81 +750,98 @@
             font-weight: 700;
         }
 
-        /* ============================================
-         *            ЗАПРЕЩЁННАЯ ТЕХНИКА
-         * ============================================ */
-        .restrictions-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: var(--spacing-2xl);
-        }
+		/* ============================================
+		 *            ЗАПРЕЩЁННАЯ ТЕХНИКА (МАКСИМАЛЬНЫЙ НАЕЗД)
+		 * ============================================ */
+		.restrictions-content {
+			display: grid;
+			grid-template-columns: 1fr 2fr;
+			gap: var(--spacing-2xl);
+		}
 
-        .banned-tanks__title {
-            color: var(--color-gold);
-            font-size: 1.125rem;
-            margin-bottom: var(--spacing-md);
-        }
+		.banned-tanks__title {
+			color: var(--color-gold);
+			font-size: 1.125rem;
+			margin-bottom: 2px;
+		}
 
-        .banned-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--spacing-md);
-        }
+		.banned-grid {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: var(--spacing-md);
+		}
 
-        .banned-category {
-            background: rgba(255, 51, 51, 0.08);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-md) var(--radius-md);
-        }
+		.banned-category {
+			background: rgba(255, 51, 51, 0.08);
+			border-radius: var(--radius-md);
+			padding: 0;
+		}
 
-        .banned-category__icon {
-            display: block;
-            margin: 0 auto 2px;
-            width: 180px;
-            height: 180px;
-            object-fit: contain;
-        }
+		.banned-category__icon {
+			display: block;
+			margin: 0 auto;
+			width: 180px;
+			height: 180px;
+			object-fit: contain;
+		}
 
-        .banned-category__title {
-            color: var(--color-gold);
-            font-size: 0.875rem;
-            margin-bottom: var(--radius-md);
-            padding-bottom: var(--radius-sm);
-            border-bottom: 1px solid var(--color-primary);
-            text-align: center;
-        }
+		.banned-category__title {
+			color: var(--color-gold);
+			font-size: 0.875rem;
+			margin: 0;
+			margin-top: -36px;
+			padding: 2px 3px 4px 3px;
+			border-bottom: 1px solid var(--color-primary);
+			text-align: center;
+			line-height: 1.2;
+		}
 
-        .banned-list {
-            list-style: none;
-        }
+		.banned-list {
+			list-style: none;
+			margin: 0;
+			padding: 2px 5px 4px 5px;
+		}
 
-        .banned-list__item {
-            display: flex;
-            align-items: center;
-            gap: var(--radius-sm);
-            padding: var(--spacing-xs) 0;
-            color: #bbbbbb;
-            font-size: 0.8125rem;
-        }
+		.banned-list__item {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			padding: 2px 0;
+			color: #bbbbbb;
+			font-size: 0.8125rem;
+			line-height: 1.3;
+		}
 
-        .banned-list__flag {
-            width: 20px;
-            height: 15px;
-            object-fit: cover;
-            border-radius: 2px;
-            flex-shrink: 0;
-        }
+		.banned-list__flag {
+			width: 20px;
+			height: 15px;
+			object-fit: cover;
+			border-radius: 2px;
+			flex-shrink: 0;
+		}
 
-        .banned-list__name {
-            flex: 1;
-        }
+		.banned-list__name {
+			flex: 1;
+		}
 
-        .restrictions-note {
-            color: var(--color-text-muted);
-            margin-top: var(--spacing-md);
-            font-size: 0.8125rem;
-            text-align: center;
-        }
+		.restrictions-note {
+			color: var(--color-text-muted);
+			margin-top: var(--spacing-sm);
+			font-size: 0.8125rem;
+			text-align: center;
+		}
+
+		/* Мобильная версия */
+		@media (max-width: 600px) {
+			.banned-category__icon {
+				width: 120px;
+				height: 120px;
+			}
+			
+			.banned-category__title {
+				margin-top: -24px;
+			}
+		}
 
         /* ============================================
          *                  ТАБЛИЦЫ
