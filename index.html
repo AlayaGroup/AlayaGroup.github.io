@@ -23,36 +23,25 @@
          *                CSS ПЕРЕМЕННЫЕ
          * ============================================ */
         :root {
-            /* Основные цвета */
             --color-primary: #ff3333;
             --color-primary-dark: #cc0000;
             --color-gold: #ffd700;
             --color-gold-dark: #e6b800;
-            
-            /* Фоны */
             --color-bg-dark: #0a0a0f;
             --color-bg-card: rgba(15, 15, 25, 0.85);
             --color-bg-card-solid: linear-gradient(135deg, rgba(20, 25, 40, 0.95), rgba(10, 15, 25, 0.95));
-            
-            /* Текст */
             --color-text-primary: #f0f0f0;
             --color-text-secondary: #cccccc;
             --color-text-muted: #aaaaaa;
             --color-text-dim: #999999;
-            
-            /* Границы */
             --border-primary: 1px solid #2a2a3e;
             --border-gold: 1px solid var(--color-gold);
             --border-accent: 1px solid var(--color-primary);
-            
-            /* Тени */
             --shadow-card: 0 20px 40px rgba(0, 0, 0, 0.5);
             --shadow-button: 0 8px 25px rgba(255, 215, 0, 0.3);
             --shadow-button-hover: 0 12px 35px rgba(255, 215, 0, 0.5);
             --shadow-glow: 0 0 40px rgba(255, 51, 51, 0.4);
             --shadow-glow-hover: 0 0 60px rgba(255, 51, 51, 0.7);
-            
-            /* Скругления */
             --radius-xs: 5px;
             --radius-sm: 8px;
             --radius-md: 12px;
@@ -60,8 +49,6 @@
             --radius-xl: 20px;
             --radius-2xl: 25px;
             --radius-full: 50px;
-            
-            /* Отступы */
             --spacing-xs: 5px;
             --spacing-sm: 10px;
             --spacing-md: 15px;
@@ -69,26 +56,16 @@
             --spacing-xl: 25px;
             --spacing-2xl: 30px;
             --spacing-3xl: 40px;
-            
-            /* Анимации */
             --transition-default: all 0.3s ease;
             --transition-transform: transform 0.3s ease;
         }
 
-        /* ============================================
-         *                  СБРОС СТИЛЕЙ
-         * ============================================ */
-        *,
-        *::before,
-        *::after {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* ============================================
-         *                  БАЗОВЫЕ СТИЛИ
-         * ============================================ */
         html {
             font-size: 16px;
         }
@@ -107,9 +84,6 @@
             min-height: 100vh;
         }
 
-        /* ============================================
-         *                  АНИМАЦИИ
-         * ============================================ */
         @keyframes floatGold {
             0%, 100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
             50% { text-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
@@ -123,18 +97,12 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* ============================================
-         *                  КОНТЕЙНЕР
-         * ============================================ */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: var(--spacing-lg) var(--spacing-2xl);
         }
 
-        /* ============================================
-         *                  ЗАГОЛОВКИ СЕКЦИЙ
-         * ============================================ */
         .section-title {
             font-size: 1.75rem;
             font-weight: 800;
@@ -156,9 +124,7 @@
             background: linear-gradient(90deg, var(--color-primary), transparent);
         }
 
-        /* ============================================
-         *                      HEADER
-         * ============================================ */
+        /* Header */
         .header {
             display: flex;
             justify-content: space-between;
@@ -222,9 +188,7 @@
             color: var(--color-gold);
         }
 
-        /* ============================================
-         *                      HERO
-         * ============================================ */
+        /* Hero */
         .hero {
             text-align: center;
             padding: var(--spacing-lg) 0 var(--spacing-3xl);
@@ -293,9 +257,7 @@
             color: var(--color-text-muted);
         }
 
-        /* ============================================
-         *                    ТАЙМЕР
-         * ============================================ */
+        /* Таймер */
         .timer-wrapper {
             display: flex;
             align-items: center;
@@ -340,9 +302,7 @@
             letter-spacing: 1px;
         }
 
-        /* ============================================
-         *                    КНОПКИ
-         * ============================================ */
+        /* Кнопки */
         .button {
             display: inline-block;
             font-weight: 800;
@@ -370,6 +330,21 @@
             background: linear-gradient(135deg, #ff4444, var(--color-primary-dark));
         }
 
+        .button--primary.button--disabled {
+            background: #555555;
+            border-color: #888888;
+            box-shadow: none;
+            cursor: not-allowed;
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .button--primary.button--disabled:hover {
+            transform: none;
+            box-shadow: none;
+            background: #555555;
+        }
+
         .button--secondary {
             background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
             color: var(--color-bg-dark);
@@ -386,23 +361,7 @@
             background: linear-gradient(135deg, #ffe44d, var(--color-gold));
         }
 
-        .button--block {
-            display: block;
-            width: fit-content;
-            margin: 0 auto;
-        }
-
-        /* ============================================
-         *                  КАРТОЧКИ
-         * ============================================ */
-        .card {
-            background: var(--color-bg-card);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-2xl);
-            border: var(--border-primary);
-        }
-
+        /* Карточки */
         .card--install {
             background: var(--color-bg-card-solid);
             border: 2px solid var(--color-primary);
@@ -416,6 +375,9 @@
             padding: 2.1875rem 1.5625rem;
             text-align: center;
             transition: var(--transition-transform);
+            background: var(--color-bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid #333;
         }
 
         .card--prize:hover {
@@ -452,16 +414,7 @@
             margin: var(--spacing-2xl) 0 var(--spacing-3xl);
         }
 
-        /* ============================================
-         *               СЕТКИ И РАСКЛАДКИ
-         * ============================================ */
-        .grid--2cols {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--spacing-xl);
-            margin: var(--spacing-2xl) 0 var(--spacing-3xl);
-        }
-
+        /* Сетки */
         .grid--3cols {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -476,9 +429,7 @@
             margin: var(--spacing-2xl) 0 var(--spacing-3xl);
         }
 
-        /* ============================================
-         *               УСТАНОВКА МОДА
-         * ============================================ */
+        /* Установка мода */
         .install-steps {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -615,14 +566,7 @@
             border-radius: 4px;
         }
 
-        .game-logo-fallback {
-            font-size: 3rem;
-            line-height: 1;
-        }
-
-        /* ============================================
-         *                    ПРИЗЫ
-         * ============================================ */
+        /* Призы */
         .prize__medal {
             font-size: 3.5rem;
             margin-bottom: var(--spacing-md);
@@ -685,9 +629,7 @@
             font-size: 0.875rem;
         }
 
-        /* ============================================
-         *               ПРАВИЛА И СПИСКИ
-         * ============================================ */
+        /* Правила */
         .card__title {
             color: var(--color-primary);
             font-size: 1.375rem;
@@ -750,132 +692,101 @@
             font-weight: 700;
         }
 
-/* ============================================
- *            ЗАПРЕЩЁННАЯ ТЕХНИКА
- * ============================================ */
-.restrictions-content {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: var(--spacing-2xl);
-}
+        /* Запрещённая техника */
+        .restrictions-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-2xl);
+        }
 
-.banned-tanks__title {
-    color: var(--color-gold);
-    font-size: 1.125rem;
-    margin-bottom: 2px;
-    position: relative;
-    z-index: 5;
-}
+        .banned-tanks__title {
+            color: var(--color-gold);
+            font-size: 1.125rem;
+            margin-bottom: 2px;
+            position: relative;
+            z-index: 5;
+        }
 
-.banned-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-md);
-}
+        .banned-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+        }
 
-.banned-category {
-    background: rgba(255, 51, 51, 0.08);
-    border-radius: var(--radius-md);
-    padding: 0;
-    position: relative;
-}
+        .banned-category {
+            background: rgba(255, 51, 51, 0.08);
+            border-radius: var(--radius-md);
+            padding: 0;
+            position: relative;
+        }
 
-.banned-category__icon {
-    display: block;
-    margin: 0 auto;
-    margin-top: -30px;
-    width: 180px;
-    height: 180px;
-    object-fit: contain;
-    position: relative;
-    z-index: 3;
-}
+        .banned-category__icon {
+            display: block;
+            margin: 0 auto;
+            margin-top: -30px;
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            position: relative;
+            z-index: 3;
+        }
 
-.banned-category__title {
-    color: var(--color-gold);
-    font-size: 0.875rem;
-    margin: 0;
-    margin-top: -36px;
-    padding: 2px 3px 4px 3px;
-    border-bottom: 1px solid var(--color-primary);
-    text-align: center;
-    line-height: 1.2;
-    position: relative;
-    z-index: 2;
-}
+        .banned-category__title {
+            color: var(--color-gold);
+            font-size: 0.875rem;
+            margin: 0;
+            margin-top: -36px;
+            padding: 2px 3px 4px 3px;
+            border-bottom: 1px solid var(--color-primary);
+            text-align: center;
+            line-height: 1.2;
+            position: relative;
+            z-index: 2;
+        }
 
-.banned-list {
-    list-style: none;
-    margin: 0;
-    padding: 8px 10px 10px 10px;
-    position: relative;
-    z-index: 2;
-}
+        .banned-list {
+            list-style: none;
+            margin: 0;
+            padding: 8px 10px 10px 10px;
+            position: relative;
+            z-index: 2;
+        }
 
-.banned-list__item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 0;
-    color: #bbbbbb;
-    font-size: 0.875rem;
-    line-height: 1.4;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
+        .banned-list__item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            color: #bbbbbb;
+            font-size: 0.875rem;
+            line-height: 1.4;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-.banned-list__item:last-child {
-    border-bottom: none;
-}
+        .banned-list__item:last-child {
+            border-bottom: none;
+        }
 
-.banned-list__flag {
-    width: 20px;
-    height: 15px;
-    object-fit: cover;
-    border-radius: 2px;
-    flex-shrink: 0;
-}
+        .banned-list__flag {
+            width: 20px;
+            height: 15px;
+            object-fit: cover;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
 
-.banned-list__name {
-    flex: 1;
-}
+        .banned-list__name {
+            flex: 1;
+        }
 
-.restrictions-note {
-    color: var(--color-text-muted);
-    margin-top: var(--spacing-sm);
-    font-size: 0.8125rem;
-    text-align: center;
-}
+        .restrictions-note {
+            color: var(--color-text-muted);
+            margin-top: var(--spacing-sm);
+            font-size: 0.8125rem;
+            text-align: center;
+        }
 
-/* Мобильная версия */
-@media (max-width: 600px) {
-    .banned-category__icon {
-        width: 120px;
-        height: 120px;
-        margin-top: -20px;
-    }
-    
-    .banned-category__title {
-        margin-top: -24px;
-    }
-    
-    .banned-list {
-        padding: 6px 8px 8px 8px;
-    }
-    
-    .banned-list__item {
-        padding: 6px 0;
-        font-size: 0.8125rem;
-    }
-    
-    .banned-list__flag {
-        width: 18px;
-        height: 14px;
-    }
-}
-
-        /* ============================================
-         *                  ТАБЛИЦЫ
-         * ============================================ */
+        /* Таблицы */
         .table-wrapper {
             overflow-x: auto;
             border-radius: var(--radius-lg);
@@ -921,9 +832,7 @@
             font-weight: 700;
         }
 
-        /* ============================================
-         *               СПОРНЫЕ СИТУАЦИИ
-         * ============================================ */
+        /* Спорные ситуации */
         .disputes-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -957,9 +866,7 @@
             font-style: italic;
         }
 
-        /* ============================================
-         *                    FOOTER
-         * ============================================ */
+        /* Footer */
         .footer {
             margin-top: 3.75rem;
             padding-top: 2.1875rem;
@@ -982,36 +889,12 @@
             line-height: 1.6;
         }
 
-        /* ============================================
-         *                  УТИЛИТЫ
-         * ============================================ */
+        /* Утилиты */
         .text-center {
             text-align: center;
         }
 
-        .text-gold {
-            color: var(--color-gold);
-        }
-
-        .text-primary {
-            color: var(--color-primary);
-        }
-
-        .mb-1 { margin-bottom: var(--spacing-sm); }
-        .mb-2 { margin-bottom: var(--spacing-md); }
-        .mb-3 { margin-bottom: var(--spacing-lg); }
-        .mb-4 { margin-bottom: var(--spacing-xl); }
-        .mb-5 { margin-bottom: var(--spacing-2xl); }
-
-        .mt-1 { margin-top: var(--spacing-sm); }
-        .mt-2 { margin-top: var(--spacing-md); }
-        .mt-3 { margin-top: var(--spacing-lg); }
-        .mt-4 { margin-top: var(--spacing-xl); }
-        .mt-5 { margin-top: var(--spacing-2xl); }
-
-        /* ============================================
-         *               МЕДИА-ЗАПРОСЫ
-         * ============================================ */
+        /* Медиа-запросы */
         @media (max-width: 900px) {
             .install-steps { grid-template-columns: 1fr; }
             .grid--3cols { grid-template-columns: 1fr; }
@@ -1036,7 +919,10 @@
             .hero__subtitle { font-size: 1rem; letter-spacing: 4px; }
             .countdown__value { font-size: 1.75rem; }
             .banned-list__item { font-size: 0.75rem; }
-            .banned-category__icon { width: 120px; height: 120px; }
+            .banned-category__icon { width: 120px; height: 120px; margin-top: -20px; }
+            .banned-category__title { margin-top: -24px; }
+            .banned-list { padding: 6px 8px 8px 8px; }
+            .banned-list__item { padding: 6px 0; }
             .banned-list__flag { width: 18px; height: 14px; }
             .screenshot__img { max-height: 200px; }
             .section-title { font-size: 1.5rem; }
@@ -1080,9 +966,7 @@
         <div class="hero__subtitle" id="tournamentSubtitle">ВНУТРИКЛАНОВЫЙ ЗАМЕС</div>
         
         <div class="hero__date-block">
-            <div class="hero__date" id="tournamentDate">
-                🔥 СТАРТ: 18 АПРЕЛЯ 2026, 20:00 МСК 🔥
-            </div>
+            <div class="hero__date" id="tournamentDate">🔥 СТАРТ: 18 АПРЕЛЯ 2026, 20:00 МСК 🔥</div>
             
             <div class="timer-wrapper">
                 <span class="timer__hourglass">⏳</span>
@@ -1108,7 +992,7 @@
         </div>
         
         <a href="#" class="button button--primary" id="registerButton">⚔️ ЗАПИСАТЬСЯ НА ТУРНИР ⚔️</a>
-        <p class="hero__tagline" id="heroTagline">Пора выяснить, чей взвод в Группировке «ALAYA» самый скилловый и крутой!</p>
+        <p class="hero__tagline" id="heroTagline">Пора выяснить, чей взвод в Группировке «ALAYA» самый скилловый!</p>
     </section>
 
     <!-- ============================================ -->
@@ -1123,7 +1007,6 @@
         
         <div class="card--install">
             
-            <!-- Скриншоты -->
             <div class="mod-screenshots">
                 <div>
                     <div class="screenshot__title">📸 В АНГАРЕ</div>
@@ -1135,18 +1018,16 @@
                 </div>
             </div>
             
-            <!-- Описание мода -->
             <div class="mod-features">
                 <h3 class="mod-features__title">✨ Что делает мод</h3>
                 <p class="mod-features__text">
                     📊 Собирает статистику для турнира в реальном времени<br>
                     🎯 Отображает текущие очки взвода прямо в бою<br>
-                    📈 Считает по формуле: <span id="formulaShort">1 урон = 1 очко, 1 фраг = 300, победа = 3000</span><br>
+                    📈 Считает по формуле: <span id="formulaShort">1 урон = 1 очко, 1 фраг = 300 очков, победа = 3000 очков</span><br>
                     📤 Автоматически отправляет результаты после боя
                 </p>
             </div>
             
-            <!-- Инструкция -->
             <div class="install-header">
                 <h3 class="install-header__title">📥 Как установить</h3>
                 <span class="warning-badge">⚠️ ЗАКРОЙТЕ ИГРУ ПЕРЕД УСТАНОВКОЙ</span>
@@ -1167,13 +1048,12 @@
                     <div class="step__number">3</div>
                     <div style="min-height: 58px; display: flex; align-items: center; justify-content: center;">
                         <img src="images/logos/mt-logo.jpg" alt="Мир танков" class="game-logo-img" id="gameLogo" onerror="this.style.display='none'; document.getElementById('gameFallback').style.display='block';">
-                        <span id="gameFallback" class="game-logo-fallback" style="display: none;">🎮</span>
+                        <span id="gameFallback" style="display: none; font-size: 3rem; line-height: 1;">🎮</span>
                     </div>
                     <div class="step__desc">Запустите игру. Мод автоматически активируется!</div>
                 </div>
             </div>
             
-            <!-- Кнопка скачать -->
             <div class="text-center">
                 <a href="#" class="button button--secondary" id="downloadModButton">📥 СКАЧАТЬ МОД</a>
             </div>
@@ -1205,10 +1085,8 @@
             <span class="section-title__line"></span>
         </div>
         
-        <!-- Три карточки в ряд -->
         <div class="grid--rules" id="rulesGrid"></div>
         
-        <!-- Ограничения и запрещённая техника на всю ширину -->
         <div class="card--restrictions" id="restrictionsCard"></div>
     </section>
 
@@ -1238,25 +1116,16 @@
     <!--              ФИНАЛЬНЫЙ ПРИЗЫВ                -->
     <!-- ============================================ -->
     <section class="text-center" style="margin: 3.125rem 0 1.875rem;">
-        <p style="font-size: 1.375rem; color: var(--color-text-secondary); margin-bottom: 1.5625rem;" id="finalCallText">
-            Не дрифтуйте на гусле, записывайтесь и покажите, на что способна Группировка «ALAYA»! 💪🔥
-        </p>
-        <a href="#" class="button button--primary" style="font-size: 1.25rem; padding: 1rem 2.8125rem;" id="finalRegisterButton">
-            ⭐ ЗАПИСАТЬСЯ СЕЙЧАС ⭐
-        </a>
+        <p style="font-size: 1.375rem; color: var(--color-text-secondary); margin-bottom: 1.5625rem;" id="finalCallText">Пора в бой! Записывайся на турнир! Наша сплочённость уже не раз приводила к победе. Вперёд, к новым триумфам! 💪🔥</p>
+        <a href="#" class="button button--primary" style="font-size: 1.25rem; padding: 1rem 2.8125rem;" id="finalRegisterButton">⭐ ЗАПИСАТЬСЯ СЕЙЧАС ⭐</a>
     </section>
 
     <!-- ============================================ -->
     <!--                    FOOTER                    -->
     <!-- ============================================ -->
     <footer class="footer">
-        <div class="footer__copyright" id="footerCopyright">
-            © 2026 Группировка «ALAYA». Все права защищены.<br>
-            <span style="font-size: 0.75rem;">Турнир посвящён памяти Чака Норриса 🕊️</span>
-        </div>
-        <div class="footer__quote" id="chuckQuote">
-            «Иногда труднее всего добиться как раз того, чего мы больше всего жаждем. Это значит, что для успеха потребуется еще больше решимости. В этом сущность победителя.»
-        </div>
+        <div class="footer__copyright" id="footerCopyright">© 2026 Группировка «ALAYA». Все права защищены.<br><span style="font-size: 0.75rem;">Турнир посвящён памяти Чака Норриса 🕊️</span></div>
+        <div class="footer__quote" id="chuckQuote">«Иногда труднее всего добиться как раз того, чего мы больше всего жаждем. Это значит, что для успеха потребуется еще больше решимости. В этом сущность победителя.»</div>
     </footer>
 
 </div>
@@ -1276,7 +1145,12 @@
         tournamentNameLine2: 'ЗЕЛЁНЫХ ТРУСЕЛЕЙ',
         tournamentSubtitle: 'ВНУТРИКЛАНОВЫЙ ЗАМЕС',
         tournamentDate: '🔥 СТАРТ: 18 АПРЕЛЯ 2026, 20:00 МСК 🔥',
-        heroTagline: 'Пора выяснить, чей взвод в Группировке «ALAYA» самый скилловый и крутой!',
+        
+        // Текст под Hero-кнопкой
+        heroTagline: 'Пора выяснить, чей взвод в Группировке «ALAYA» самый скилловый!',
+        
+        // Текст над финальной кнопкой
+        finalCallText: 'Пора в бой! Вперёд, к новым триумфам! 💪🔥',
         
         // Призовой фонд
         totalPrize: 82500,
@@ -1291,6 +1165,18 @@
         gamePath: 'C:\\Games\\Tanki',
         modDownloadLink: 'https://raw.githubusercontent.com/AlayaGroup/AlayaGroup.github.io/refs/heads/main/ТУРНИР%20ЗЕЛЁНЫХ%20ТРУСЕЛЕЙ%20МОД.zip',
         registerLink: 'https://discord.com/channels/1141781576716390400/1196199867496804462/1492905675871883347',
+        
+        // Даты
+        registrationEndDate: new Date('2026-04-15T18:00:00+03:00'),   // 15 апреля 2026, 18:00 МСК
+        tournamentStartDate: new Date('2026-04-18T20:00:00+03:00'),   // 18 апреля 2026, 20:00 МСК
+        
+        // Тексты кнопок
+        buttonTexts: {
+            heroActive: '⚔️ ЗАПИСАТЬСЯ НА ТУРНИР ⚔️',
+            heroInactive: '🚫 РЕГИСТРАЦИЯ ЗАКРЫТА 🚫',
+            finalActive: '⭐ ЗАПИСАТЬСЯ СЕЙЧАС ⭐',
+            finalInactive: '🚫 РЕГИСТРАЦИЯ ЗАКРЫТА 🚫'
+        },
         
         // Формула очков
         formula: {
@@ -1325,44 +1211,21 @@
             'CS-63 Wilk': 'poland_small.png'
         },
         
-        // Списки запрещённой техники (отсортированы по нациям)
+        // Списки запрещённой техники
         bannedTanks: {
-            tt: [
-                'Об. 278',
-                'ТЭТ-100',
-                'E 100 Feuerbär',
-                'T57 Heavy',
-                'Vandal',
-                'FV215b',
-                'WZ-111 5A',
-                'WZ-111 QL',
-                'Type 5 Heavy',
-                'Orso'
-            ],
-            pt: [
-                'Sturmtiger',
-                'Roland',
-                'Gendarme',
-                'FV4005',
-                'FV215b 183'
-            ],
-            st: [
-                'CS-63 Wilk'
-            ]
+            tt: ['Об. 278', 'ТЭТ-100', 'E 100 Feuerbär', 'T57 Heavy', 'Vandal', 'FV215b', 'WZ-111 5A', 'WZ-111 QL', 'Type 5 Heavy', 'Orso'],
+            pt: ['Sturmtiger', 'Roland', 'Gendarme', 'FV4005', 'FV215b 183'],
+            st: ['CS-63 Wilk']
         },
         
         // Цитата Чака Норриса
         chuckQuote: '«Иногда труднее всего добиться как раз того, чего мы больше всего жаждем. Это значит, что для успеха потребуется еще больше решимости. В этом сущность победителя.»'
     };
     
-    // Дата турнира: 18 апреля 2026, 20:00 МСК (UTC+3)
-    const TOURNAMENT_START_DATE = new Date('2026-04-18T20:00:00+03:00');
-    
     // ================================================
     //                  УТИЛИТЫ
     // ================================================
     const formatNumber = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    
     const padZero = (num) => String(num).padStart(2, '0');
     
     // ================================================
@@ -1370,22 +1233,20 @@
     // ================================================
     function updateCountdown() {
         const now = new Date();
-        const diff = TOURNAMENT_START_DATE - now;
+        const diff = TOURNAMENT_CONFIG.tournamentStartDate - now;
         
-        const elements = {
-            days: document.getElementById('days'),
-            hours: document.getElementById('hours'),
-            minutes: document.getElementById('minutes'),
-            seconds: document.getElementById('seconds'),
-            hourglass: document.querySelector('.timer__hourglass')
-        };
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        const hourglassEl = document.querySelector('.timer__hourglass');
         
         if (diff <= 0) {
-            elements.days.textContent = '00';
-            elements.hours.textContent = '00';
-            elements.minutes.textContent = '00';
-            elements.seconds.textContent = '00';
-            if (elements.hourglass) elements.hourglass.textContent = '⌛';
+            daysEl.textContent = '00';
+            hoursEl.textContent = '00';
+            minutesEl.textContent = '00';
+            secondsEl.textContent = '00';
+            if (hourglassEl) hourglassEl.textContent = '⌛';
             return;
         }
         
@@ -1394,10 +1255,60 @@
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
-        elements.days.textContent = padZero(days);
-        elements.hours.textContent = padZero(hours);
-        elements.minutes.textContent = padZero(minutes);
-        elements.seconds.textContent = padZero(seconds);
+        daysEl.textContent = padZero(days);
+        hoursEl.textContent = padZero(hours);
+        minutesEl.textContent = padZero(minutes);
+        secondsEl.textContent = padZero(seconds);
+    }
+    
+    // ================================================
+    //            ОБНОВЛЕНИЕ КНОПОК ПО ДАТЕ
+    // ================================================
+    function updateButtonsByDate() {
+        const now = new Date();
+        const isRegistrationClosed = now >= TOURNAMENT_CONFIG.registrationEndDate;
+        
+        const heroButton = document.getElementById('registerButton');
+        const finalButton = document.getElementById('finalRegisterButton');
+        
+        const btnTexts = TOURNAMENT_CONFIG.buttonTexts;
+        
+        if (isRegistrationClosed) {
+            heroButton.textContent = btnTexts.heroInactive;
+            finalButton.textContent = btnTexts.finalInactive;
+            heroButton.classList.add('button--disabled');
+            finalButton.classList.add('button--disabled');
+            heroButton.removeAttribute('href');
+            finalButton.removeAttribute('href');
+        } else {
+            heroButton.textContent = btnTexts.heroActive;
+            finalButton.textContent = btnTexts.finalActive;
+            heroButton.href = TOURNAMENT_CONFIG.registerLink;
+            finalButton.href = TOURNAMENT_CONFIG.registerLink;
+        }
+    }
+    
+    // ================================================
+    //         СИНХРОНИЗАЦИЯ СТАТИЧЕСКИХ ТЕКСТОВ
+    // ================================================
+    function syncStaticTexts() {
+        const cfg = TOURNAMENT_CONFIG;
+        
+        document.getElementById('tournamentNameLine1').textContent = cfg.tournamentNameLine1;
+        document.getElementById('tournamentNameLine2').textContent = cfg.tournamentNameLine2;
+        document.getElementById('tournamentSubtitle').textContent = cfg.tournamentSubtitle;
+        document.getElementById('tournamentDate').textContent = cfg.tournamentDate;
+        document.getElementById('heroTagline').textContent = cfg.heroTagline;
+        document.getElementById('finalCallText').textContent = cfg.finalCallText;
+        document.getElementById('chuckQuote').innerHTML = cfg.chuckQuote;
+        document.getElementById('sponsorName').textContent = cfg.sponsorName;
+        document.getElementById('totalPrize').innerHTML = `${formatNumber(cfg.totalPrize)} <span class="prize-header__currency">💰</span>`;
+        document.getElementById('gamePath').textContent = cfg.gamePath;
+        document.getElementById('gamePathRepeat').textContent = cfg.gamePath;
+        document.getElementById('formulaShort').textContent = 
+            `1 урон = ${cfg.formula.damage} очко, 1 фраг = ${cfg.formula.frag} очков, победа = ${cfg.formula.win} очков`;
+        document.getElementById('footerCopyright').innerHTML = 
+            `© 2026 ${cfg.groupName}. Все права защищены.<br><span style="font-size: 0.75rem;">Турнир посвящён памяти Чака Норриса 🕊️</span>`;
     }
     
     // ================================================
@@ -1428,48 +1339,33 @@
         updateCountdown();
         setInterval(updateCountdown, 1000);
         
-        // Заполнение шапки
-        document.getElementById('totalPrize').innerHTML = `${formatNumber(cfg.totalPrize)} <span class="prize-header__currency">💰</span>`;
-        document.getElementById('sponsorName').textContent = cfg.sponsorName;
+        // Синхронизация всех статических текстов
+        syncStaticTexts();
         
-        // Заполнение Hero
-        document.getElementById('tournamentNameLine1').textContent = cfg.tournamentNameLine1;
-        document.getElementById('tournamentNameLine2').textContent = cfg.tournamentNameLine2;
-        document.getElementById('tournamentSubtitle').textContent = cfg.tournamentSubtitle;
-        document.getElementById('tournamentDate').textContent = cfg.tournamentDate;
-        document.getElementById('heroTagline').textContent = cfg.heroTagline;
+        // Обновление кнопок по дате
+        updateButtonsByDate();
         
-        // Пути и ссылки
-        document.getElementById('gamePath').textContent = cfg.gamePath;
-        document.getElementById('gamePathRepeat').textContent = cfg.gamePath;
+        // Ссылки
         document.getElementById('downloadModButton').href = cfg.modDownloadLink;
-        document.getElementById('registerButton').href = cfg.registerLink;
-        document.getElementById('finalRegisterButton').href = cfg.registerLink;
         
-        // Формула
-        document.getElementById('formulaShort').textContent = 
-            `1 урон = ${cfg.formula.damage} очко, 1 фраг = ${cfg.formula.frag} очков, победа = ${cfg.formula.win} очков`;
-        
-        // ================================================
-        //                  ПРИЗОВЫЕ МЕСТА
-        // ================================================
+        // Призовые места
         document.getElementById('prizesGrid').innerHTML = `
             <div class="card--prize card--prize-gold">
                 <div class="prize__medal">🥇</div>
                 <div class="prize__place">1 МЕСТО</div>
-                <div class="prize__amount">${formatNumber(cfg.prizes.first)}  ЗОЛОТА</div>
+                <div class="prize__amount">${formatNumber(cfg.prizes.first)} ЗОЛОТА</div>
                 <div class="prize__per-player">по ${formatNumber(cfg.prizes.first / 3)} каждому игроку взвода</div>
             </div>
             <div class="card--prize card--prize-silver">
                 <div class="prize__medal">🥈</div>
                 <div class="prize__place">2 МЕСТО</div>
-                <div class="prize__amount">${formatNumber(cfg.prizes.second)}  ЗОЛОТА</div>
+                <div class="prize__amount">${formatNumber(cfg.prizes.second)} ЗОЛОТА</div>
                 <div class="prize__per-player">по ${formatNumber(cfg.prizes.second / 3)} каждому игроку взвода</div>
             </div>
             <div class="card--prize card--prize-bronze">
                 <div class="prize__medal">🥉</div>
                 <div class="prize__place">3 МЕСТО</div>
-                <div class="prize__amount">${formatNumber(cfg.prizes.third)}  ЗОЛОТА</div>
+                <div class="prize__amount">${formatNumber(cfg.prizes.third)} ЗОЛОТА</div>
                 <div class="prize__per-player">по ${formatNumber(cfg.prizes.third / 3)} каждому игроку взвода</div>
             </div>
         `;
@@ -1484,9 +1380,7 @@
             <p class="special-nomination__per-player">по ${formatNumber(cfg.prizes.hunter / 3)} каждому игроку взвода</p>
         `;
         
-        // ================================================
-        //                  РЕГЛАМЕНТ (3 карточки)
-        // ================================================
+        // Регламент (3 карточки)
         document.getElementById('rulesGrid').innerHTML = `
             <div class="card--rule">
                 <h3 class="card__title">⚙️ ФОРМАТ</h3>
@@ -1517,9 +1411,7 @@
             </div>
         `;
         
-        // ================================================
-        //            ОГРАНИЧЕНИЯ И ЗАПРЕЩЁННАЯ ТЕХНИКА
-        // ================================================
+        // Ограничения и запрещённая техника
         document.getElementById('restrictionsCard').innerHTML = `
             <h3 class="card__title">🚫 ОГРАНИЧЕНИЯ И ЗАПРЕЩЁННАЯ ТЕХНИКА</h3>
             <div class="restrictions-content">
@@ -1559,9 +1451,7 @@
         renderBannedList(cfg.bannedTanks.pt, 'bannedPT');
         renderBannedList(cfg.bannedTanks.st, 'bannedST');
         
-        // ================================================
-        //                  ТАБЛИЦА ЭТАПОВ
-        // ================================================
+        // Таблица этапов
         let stagesHtml = `
             <thead>
                 <tr class="table__head">
@@ -1589,9 +1479,7 @@
         
         document.getElementById('stagesTable').innerHTML = stagesHtml + '</tbody>';
         
-        // ================================================
-        //               СПОРНЫЕ СИТУАЦИИ
-        // ================================================
+        // Спорные ситуации
         document.getElementById('disputesCard').innerHTML = `
             <h3 class="card__title" style="color: var(--color-gold);">⚖️ СПОРНЫЕ СИТУАЦИИ И ПЕРЕИГРОВКИ</h3>
             <div class="disputes-grid">
@@ -1626,15 +1514,6 @@
                 <strong style="color: var(--color-primary);">Решение судьи — окончательное.</strong>
             </div>
         `;
-        
-        // ================================================
-        //                  ФУТЕР
-        // ================================================
-        document.getElementById('finalCallText').innerHTML = 
-            `Не дрифтуйте на гусле, записывайтесь и покажите, на что способна ${cfg.groupName}! 💪🔥`;
-        document.getElementById('footerCopyright').innerHTML = 
-            `© 2026 ${cfg.groupName}. Все права защищены.<br><span style="font-size: 0.75rem;">Турнир посвящён памяти Чака Норриса 🕊️</span>`;
-        document.getElementById('chuckQuote').innerHTML = cfg.chuckQuote;
     });
 </script>
 
