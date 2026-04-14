@@ -53,6 +53,7 @@
             --shadow-glow-hover: 0 0 60px rgba(255, 51, 51, 0.7);
             
             /* Скругления */
+            --radius-xs: 5px;
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
@@ -549,6 +550,7 @@
         .screenshot__img {
             width: 100%;
             max-width: 100%;
+            max-height: 300px;
             height: auto;
             border-radius: var(--radius-md);
             border: 2px solid #333;
@@ -604,6 +606,18 @@
             font-weight: 700;
             font-size: 0.875rem;
             text-transform: uppercase;
+        }
+
+        .game-logo-img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+
+        .game-logo-fallback {
+            font-size: 3rem;
+            line-height: 1;
         }
 
         /* ============================================
@@ -765,9 +779,9 @@
 
         .banned-category__icon {
             display: block;
-            margin: 0 auto var(--spacing-sm);
-            width: 44px;
-            height: 44px;
+            margin: 0 auto 2px;
+            width: 180px;
+            height: 180px;
             object-fit: contain;
         }
 
@@ -810,38 +824,6 @@
             margin-top: var(--spacing-md);
             font-size: 0.8125rem;
             text-align: center;
-        }
-
-        /* ============================================
-         *               ФОРМУЛА ОЧКОВ
-         * ============================================ */
-        .formula-box {
-            background: rgba(255, 215, 0, 0.1);
-            padding: var(--spacing-lg);
-            border-radius: var(--radius-md);
-            margin-top: var(--spacing-lg);
-            text-align: center;
-        }
-
-        .formula-box__title {
-            color: var(--color-gold);
-            font-weight: 700;
-            margin-bottom: var(--radius-md);
-        }
-
-        .formula-items {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: var(--spacing-md);
-        }
-
-        .formula-item {
-            text-align: center;
-        }
-
-        .formula-item__emoji {
-            font-size: 1.5rem;
         }
 
         /* ============================================
@@ -1007,8 +989,9 @@
             .hero__subtitle { font-size: 1rem; letter-spacing: 4px; }
             .countdown__value { font-size: 1.75rem; }
             .banned-list__item { font-size: 0.75rem; }
-            .banned-category__icon { width: 36px; height: 36px; }
+            .banned-category__icon { width: 120px; height: 120px; }
             .banned-list__flag { width: 18px; height: 14px; }
+            .screenshot__img { max-height: 200px; }
             .section-title { font-size: 1.5rem; }
         }
     </style>
@@ -1136,8 +1119,8 @@
                 <div class="step">
                     <div class="step__number">3</div>
                     <div style="min-height: 58px; display: flex; align-items: center; justify-content: center;">
-                        <img src="images/logos/mt-logo.jpg" alt="Мир танков" style="width: 48px; height: 48px; object-fit: contain;" id="gameLogo" onerror="this.style.display='none'; document.getElementById('gameFallback').style.display='block';">
-                        <span id="gameFallback" style="display: none; font-size: 3rem; line-height: 1;">🎮</span>
+                        <img src="images/logos/mt-logo.jpg" alt="Мир танков" class="game-logo-img" id="gameLogo" onerror="this.style.display='none'; document.getElementById('gameFallback').style.display='block';">
+                        <span id="gameFallback" class="game-logo-fallback" style="display: none;">🎮</span>
                     </div>
                     <div class="step__desc">Запустите игру. Мод автоматически активируется!</div>
                 </div>
@@ -1259,7 +1242,7 @@
         
         // Технические данные
         gamePath: 'C:\\Games\\Tanki',
-        modDownloadLink: 'https://downloader.disk.yandex.ru/disk/d4312f2e5db54e6654af99a1869b685399e9694a0bc1b28a6f57e48a237e907f/69ddbd4f/bDzGi3rOIHDYUT7YhQ7bbDPE3RoFbLWldxHVL0y5cdnGDPgde7I4m7uZRwC8ErG2qLRs_nfdHMT6cfxEKL8tOQ%3D%3D?uid=1129013985&filename=ТУРНИР%20ЗЕЛЁНЫХ%20ТРУСЕЛЕЙ.zip&disposition=attachment&hash=&limit=0&content_type=application%2Fzip&owner_uid=1129013985&fsize=184391&hid=2e5bf0f94fb348789978c9c8539a9eae&media_type=compressed&tknv=v3&etag=29d47395167cc05c17de0e988d96d7b5',
+        modDownloadLink: 'https://disk.yandex.ru/d/waxZGnixDsxdUA',
         registerLink: 'https://discord.com/channels/1141781576716390400/1196199867496804462/1492905675871883347',
         
         // Формула очков
@@ -1478,23 +1461,12 @@
             </div>
             <div class="card--rule">
                 <h3 class="card__title">🎯 ФОРМУЛА ОЧКОВ</h3>
-                <div class="formula-box">
-                    <div class="formula-box__title">Классический «Чак»:</div>
-                    <div class="formula-items">
-                        <div class="formula-item">
-                            <div class="formula-item__emoji">📊</div>
-                            <div>1 урон = ${cfg.formula.damage} очко</div>
-                        </div>
-                        <div class="formula-item">
-                            <div class="formula-item__emoji">💀</div>
-                            <div>1 фраг = ${cfg.formula.frag}</div>
-                        </div>
-                        <div class="formula-item">
-                            <div class="formula-item__emoji">🏁</div>
-                            <div>Победа = ${cfg.formula.win}</div>
-                        </div>
-                    </div>
-                </div>
+                <ul class="list">
+                    <li class="list__item"><span class="highlight">Классический «Чак»:</span></li>
+                    <li class="list__item">📊 1 урон = ${cfg.formula.damage} очко</li>
+                    <li class="list__item">💀 1 фраг = ${cfg.formula.frag} очков</li>
+                    <li class="list__item">🏁 1 победа = ${cfg.formula.win} очков</li>
+                </ul>
             </div>
         `;
         
