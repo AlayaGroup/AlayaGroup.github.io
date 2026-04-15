@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Турнир Зелёных Труселей — внутриклановый замес группировки ALAYA в Мире танков">
     
-    <!-- Favicon — красная звезда ★ -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='78' text-anchor='middle' font-size='80' fill='%23ff3333' font-family='Arial'%3E★%3C/text%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50' y='78' text-anchor='middle' font-size='80' fill='%23ff3333' font-family='Arial'%3E★%3C/text%3E%3C/svg%3E">
-    
-    <meta name="theme-color" content="#ff3333">
-    
-    <title>Группировка «ALAYA» | Турнир Зелёных Труселей</title>
+	<!-- Favicon — логотип ALAYA -->
+	<link rel="icon" href="images/logos/alaya-logo.png">
+	<link rel="apple-touch-icon" href="images/logos/alaya-logo.png">
+
+	<meta name="theme-color" content="#ff3333">
+
+	<title>Группировка «ALAYA» | Турнир Зелёных Труселей</title>
     
     <!-- Шрифты -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,7 +70,7 @@
             line-height: 1.6;
             background-image: 
                 linear-gradient(rgba(10, 10, 15, 0.88), rgba(10, 10, 15, 0.95)),
-                url('https://images.pexels.com/photos/163444/world-of-tanks-computer-game-video-games-163444.jpeg?auto=compress&cs=tinysrgb&w=1920');
+                url('images/background/alayabackground.png');
             background-size: cover;
             background-position: center 30%;
             background-attachment: fixed;
@@ -124,14 +124,17 @@
             gap: var(--spacing-lg);
         }
 
-        .brand__name { font-size: 1.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
-        .brand__star { color: var(--color-primary); font-size: 2rem; margin-right: var(--spacing-xs); }
-        .brand__gold { color: var(--color-gold); }
+		.brand__name { font-size: 1.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; display: flex; align-items: center; gap: 8px; }
+		.brand__logo { height: 2.8rem; width: auto; }
+		.brand__text { transform: translateY(4px); }
+		.brand__red { color: var(--color-primary); }
 
         .prize-header { text-align: right; }
         .prize-header__label { font-size: 0.8125rem; color: var(--color-text-dim); letter-spacing: 4px; text-transform: uppercase; }
-        .prize-header__amount { font-size: 3.25rem; font-weight: 900; color: var(--color-gold); line-height: 1; animation: floatGold 2s infinite; }
-        .prize-header__currency { font-size: 1.25rem; color: var(--color-gold); margin-left: var(--spacing-sm); }
+		.prize-header__amount { font-size: 3.25rem; font-weight: 900; color: var(--color-gold); line-height: 1; animation: floatGold 2s infinite; display: flex; align-items: flex-end; justify-content: flex-end; gap: 0; }
+		.prize-header__currency { font-size: 2.5rem; color: var(--color-gold); display: inline-block; line-height: 1; position: relative; z-index: 2; transform: translateY(-5px); }
+		.prize-header__currency--medium { font-size: 2rem; position: relative; z-index: 3; margin-left: -35px; margin-right: 0; transform: translateY(-6px); }
+		.prize-header__currency--small { font-size: 1.5rem; position: relative; z-index: 3; margin-right: -30px; transform: translateY(-5px); }
         .sponsor-tag { font-size: 0.875rem; color: var(--color-text-muted); margin-top: var(--spacing-xs); }
         .sponsor-tag__crown { color: var(--color-gold); }
 
@@ -668,9 +671,10 @@
     <!-- ============================================ -->
     <header class="header">
         <div class="brand">
-            <span class="brand__name">
-                <span class="brand__star">★</span>Группировка <span class="brand__gold">«ALAYA»</span>
-            </span>
+			<span class="brand__name">
+				<img src="images/logos/alaya-logo.png" alt="ALAYA" class="brand__logo">
+				<span class="brand__text">Группировка <span class="brand__red">«ALAYA»</span></span>
+			</span>
         </div>
         <div class="prize-header">
             <div class="prize-header__label">ПРИЗОВОЙ ФОНД</div>
@@ -1220,7 +1224,7 @@
         document.getElementById('finalCallText').textContent = cfg.finalCallText;
         document.getElementById('chuckQuote').innerHTML = cfg.chuckQuote;
         document.getElementById('sponsorName').textContent = cfg.sponsorName;
-        document.getElementById('totalPrize').innerHTML = `${formatNumber(cfg.totalPrize)} <span class="prize-header__currency">💰</span>`;
+        document.getElementById('totalPrize').innerHTML = `${formatNumber(cfg.totalPrize)} <span class="prize-header__currency prize-header__currency--small">💰</span><span class="prize-header__currency">💰</span><span class="prize-header__currency prize-header__currency--medium">💰</span>`;
         document.getElementById('gamePath').textContent = cfg.gamePath;
         document.getElementById('gamePathRepeat').textContent = cfg.gamePath;
         document.getElementById('formulaShort').textContent = `1 урон = ${cfg.formula.damage} очко, 1 фраг = ${cfg.formula.frag} очков, победа = ${cfg.formula.win} очков`;
