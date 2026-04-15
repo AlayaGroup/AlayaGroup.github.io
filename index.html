@@ -63,7 +63,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { font-size: 16px; }
 
-        body {
+		body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--color-bg-dark);
             color: var(--color-text-primary);
@@ -76,6 +76,7 @@
             background-attachment: fixed;
             min-height: 100vh;
             position: relative;
+            overflow-x: visible !important;
         }
 
         @keyframes floatGold {
@@ -97,6 +98,8 @@
             padding: var(--spacing-lg) var(--spacing-2xl);
             position: relative;
             z-index: 5;
+            overflow-x: visible !important;
+            overflow-y: visible !important;
         }
 
         .section-title {
@@ -447,7 +450,7 @@
         .screenshot__img {
             width: 100%;
             max-width: 100%;
-            max-height: 300px;
+            max-height: 500px;
             height: auto;
             border-radius: var(--radius-md);
             border: 2px solid #333;
@@ -611,6 +614,14 @@
         .text-center { text-align: center; }
 
         /* Медиа-запросы */
+        @media (max-width: 1100px) {
+            .header {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: var(--spacing-lg);
+            }
+        }
+
         @media (max-width: 900px) {
             .install-steps { grid-template-columns: 1fr; }
             .grid--3cols { grid-template-columns: 1fr; }
@@ -626,12 +637,23 @@
             .timer-wrapper { flex-direction: column; gap: var(--spacing-sm); }
             .winners-row { flex-direction: column; align-items: center; }
             .winner-card { width: 100%; max-width: 300px; }
+            
+            /* Расписание на планшетах */
+            .schedule-hero > div {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px !important;
+                padding: 10px 16px !important;
+            }
+            .schedule-hero span[style*="color: rgba(255,255,255,0.1)"] {
+                display: none;
+            }
         }
 
         @media (max-width: 600px) {
             .container { padding: var(--spacing-md); }
             .header { flex-direction: column; text-align: center; }
-			.hero__tagline img { max-width: 200px !important; }
+            .hero__tagline img { max-width: 200px !important; }
             .prize-header { text-align: center; }
             .prize-header__amount { font-size: 2.5rem; }
             .hero__title { font-size: 2rem; }
@@ -651,6 +673,38 @@
             .winner-card { padding: 15px 20px; }
             .confetti-toggle { padding: 8px 16px; font-size: 0.9rem; }
             .confetti-control { bottom: 20px; left: 20px; }
+            
+            /* Расписание на телефонах — всё в колонку */
+            .schedule-hero {
+                margin-top: 20px !important;
+            }
+            .schedule-hero > div {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 8px !important;
+                padding: 12px 16px !important;
+                width: 100%;
+                max-width: 260px;
+                margin: 0 auto;
+            }
+            .schedule-hero > div > div {
+                width: 100%;
+                justify-content: space-between !important;
+            }
+            .schedule-hero span[style*="color: rgba(255,255,255,0.1)"] {
+                display: none !important;
+            }
+            /* Компактные размеры текста */
+            .schedule-hero span {
+                font-size: 0.65rem !important;
+            }
+            .schedule-hero span[style*="font-size: 0.5rem"] {
+                font-size: 0.6rem !important;
+            }
+            .schedule-hero span[style*="font-size: 0.45rem"] {
+                font-size: 0.5rem !important;
+                padding: 2px 5px !important;
+            }
         }
     </style>
 </head>
@@ -671,11 +725,12 @@
     <!-- ============================================ -->
     <header class="header">
         <div class="brand">
-			<span class="brand__name">
-				<img src="images/logos/alaya-logo.png" alt="ALAYA" class="brand__logo">
-				<span class="brand__text">Группировка <span class="brand__red">«ALAYA»</span></span>
-			</span>
+            <span class="brand__name">
+                <img src="images/logos/alaya-logo.png" alt="ALAYA" class="brand__logo">
+                <span class="brand__text">Группировка <span class="brand__red">«ALAYA»</span></span>
+            </span>
         </div>
+        
         <div class="prize-header">
             <div class="prize-header__label">ПРИЗОВОЙ ФОНД</div>
             <div class="prize-header__amount" id="totalPrize"></div>
@@ -685,9 +740,6 @@
         </div>
     </header>
 
-    <!-- ============================================ -->
-    <!--                     HERO                     -->
-    <!-- ============================================ -->
     <section class="hero">
         <div class="hero__memorial">
             🕊️ Посвящается памяти великого и непобедимого <span>ЧАКА НОРРИСА</span> 🕊️
@@ -727,6 +779,39 @@
         
         <a href="#" class="button button--primary" id="registerButton"></a>
         <p class="hero__tagline" id="heroTagline"></p>
+        
+        <!-- РАСПИСАНИЕ ПОД ТЕГЛАЙНОМ -->
+        <div class="schedule-hero" style="display: flex; justify-content: center; margin-top: 25px;">
+            <div style="display: flex; align-items: center; gap: 20px; background: rgba(15, 18, 28, 0.25); padding: 8px 22px; border-radius: 40px; backdrop-filter: blur(4px); border: 1px solid rgba(255, 51, 51, 0.1);">
+                <!-- Регистрация -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="color: #8bc34a; font-size: 0.5rem;">●</span>
+                    <span style="color: #aaa; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.5px;">Рег.</span>
+                    <span style="font-weight: 600; font-size: 0.6rem; color: #8bc34a;" id="schRegDate">15 апр</span>
+                    <span style="font-size: 0.45rem; padding: 2px 7px; border-radius: 12px; background: rgba(139,195,74,0.12); color: #8bc34a; font-weight: 600;" id="schRegStatus">закрыта</span>
+                </div>
+                
+                <span style="color: rgba(255,255,255,0.1);">|</span>
+                
+                <!-- Старт -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="color: #ffd700; font-size: 0.5rem;">●</span>
+                    <span style="color: #aaa; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.5px;">Турнир</span>
+                    <span style="font-weight: 600; font-size: 0.6rem; color: #ffd700;" id="schStartDate">18 апр</span>
+                    <span style="font-size: 0.45rem; padding: 2px 7px; border-radius: 12px; background: rgba(255,215,0,0.1); color: #ffd700; font-weight: 600;" id="schStartStatus">завершён</span>
+                </div>
+                
+                <span style="color: rgba(255,255,255,0.1);">|</span>
+                
+                <!-- Результаты -->
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span style="color: #ff6666; font-size: 0.5rem;">●</span>
+                    <span style="color: #aaa; font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.5px;">Итоги</span>
+                    <span style="font-weight: 600; font-size: 0.6rem; color: #ff6666;" id="schResultsDate">20 апр</span>
+                    <span style="font-size: 0.45rem; padding: 2px 7px; border-radius: 12px; background: rgba(255,102,102,0.1); color: #ff6666; font-weight: 600;" id="schResultsStatus">ГОТОВЫ</span>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- ============================================ -->
@@ -882,7 +967,7 @@
         modDownloadLink: 'https://raw.githubusercontent.com/AlayaGroup/AlayaGroup.github.io/refs/heads/main/ТУРНИР%20ЗЕЛЁНЫХ%20ТРУСЕЛЕЙ%20МОД.zip',
         registerLink: 'https://discord.com/channels/1141781576716390400/1196199867496804462/1492905675871883347',
         registrationEndDate: new Date('2026-04-15T18:00:00+03:00'),
-        tournamentStartDate: new Date('2026-04-18T20:00:00+03:00'),
+        tournamentStartDate: new Date('2026-04-17T20:00:00+03:00'),
         tournamentEndDate: new Date('2026-04-20T00:00:00+03:00'),
         buttonTexts: {
             heroActive: '⚔️ ЗАПИСАТЬСЯ НА ТУРНИР ⚔️',
@@ -916,6 +1001,12 @@
         },
         chuckQuote: '«Иногда труднее всего добиться как раз того, чего мы больше всего жаждем. Это значит, что для успеха потребуется еще больше решимости. В этом сущность победителя.»'
     };
+    
+    // ================================================
+    //         МАССИВЫ МЕСЯЦЕВ ДЛЯ РАСПИСАНИЯ
+    // ================================================
+    const MONTHS_SHORT = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+    const MONTHS_SHORT_UPPER = ['ЯНВ', 'ФЕВ', 'МАР', 'АПР', 'МАЯ', 'ИЮН', 'ИЮЛ', 'АВГ', 'СЕН', 'ОКТ', 'НОЯ', 'ДЕК'];
     
     // ================================================
     //                  УТИЛИТЫ
@@ -1166,18 +1257,19 @@
 		const heroButton = document.getElementById('registerButton');
 		const finalButton = document.getElementById('finalRegisterButton');
 		const btnTexts = cfg.buttonTexts;
-		const isRegistrationClosed = now >= cfg.registrationEndDate || now >= cfg.tournamentStartDate || now >= cfg.tournamentEndDate;
 		
-		// Если турнир завершён — скрываем кнопки полностью
-		if (now >= cfg.tournamentEndDate) {
+		// Если бои уже идут или турнир завершён — скрываем кнопки полностью
+		if (now >= cfg.tournamentStartDate) {
 			heroButton.style.display = 'none';
 			finalButton.style.display = 'none';
 			return;
 		}
 		
-		// Иначе показываем и настраиваем
+		// Иначе показываем
 		heroButton.style.display = 'inline-block';
 		finalButton.style.display = 'inline-block';
+		
+		const isRegistrationClosed = now >= cfg.registrationEndDate;
 		
 		if (isRegistrationClosed) {
 			heroButton.textContent = btnTexts.heroInactive;
@@ -1199,24 +1291,90 @@
 	// ================================================
 	//         ОБНОВЛЕНИЕ ТЕКСТА ПОД HERO-КНОПКОЙ
 	// ================================================
-	function updateHeroTagline() {
-		const now = new Date();
-		const cfg = TOURNAMENT_CONFIG;
-		const heroTagline = document.getElementById('heroTagline');
-		
-		if (now >= cfg.tournamentEndDate) {
-			// Заменяем текст на GIF
-			heroTagline.innerHTML = `<img src="images/mem/sigma.gif" alt="Sigma" style="max-width: 300px; width: 100%; height: auto; border-radius: 8px; margin-top: 20px;">`;
-		} else {
-			// Обычный текст
-			heroTagline.textContent = cfg.heroTagline;
-		}
-	}
+    function updateHeroTagline() {
+        const now = new Date();
+        const cfg = TOURNAMENT_CONFIG;
+        const heroTagline = document.getElementById('heroTagline');
+        
+        if (now >= cfg.tournamentEndDate) {
+            heroTagline.innerHTML = `<img src="images/mem/sigma.gif" alt="Sigma" style="max-width: 300px; width: 100%; height: auto; border-radius: 8px; margin-top: 20px;">`;
+        } else {
+            heroTagline.textContent = cfg.heroTagline;
+        }
+    }
+    
+    // ================================================
+    //         ФУНКЦИИ ДЛЯ КОМПАКТНОГО РАСПИСАНИЯ
+    // ================================================
+    function fmtDateShortUpper(d) { return `${d.getDate()} ${MONTHS_SHORT_UPPER[d.getMonth()]}`; }
+    function fmtDateCompact(d) { return `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]}, ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`; }
+    
+    function updateScheduleCompact() {
+        const cfg = TOURNAMENT_CONFIG;
+        const now = Date.now();
+        
+        // Скрываем расписание после завершения турнира
+        const scheduleHero = document.querySelector('.schedule-hero');
+        if (now >= cfg.tournamentEndDate) {
+            if (scheduleHero) scheduleHero.style.display = 'none';
+            return;
+        } else {
+            if (scheduleHero) scheduleHero.style.display = 'flex';
+        }
+        
+        // Даты в коротком формате (только число и месяц)
+        const fmtDateMini = (d) => `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]}`;
+        
+        document.getElementById('schRegDate').textContent = fmtDateMini(cfg.registrationEndDate);
+        document.getElementById('schStartDate').textContent = fmtDateMini(cfg.tournamentStartDate);
+        document.getElementById('schResultsDate').textContent = fmtDateMini(cfg.tournamentEndDate);
+        
+        const regEl = document.getElementById('schRegStatus');
+        const startEl = document.getElementById('schStartStatus');
+        const resEl = document.getElementById('schResultsStatus');
+        
+        // Регистрация
+        if (now >= cfg.registrationEndDate || now >= cfg.tournamentStartDate) {
+            regEl.textContent = 'закрыта';
+            regEl.style.background = 'rgba(255,102,102,0.12)';
+            regEl.style.color = '#ff6666';
+        } else {
+            regEl.textContent = 'открыта';
+            regEl.style.background = 'rgba(139,195,74,0.15)';
+            regEl.style.color = '#8bc34a';
+        }
+        
+        // Старт
+        if (now >= cfg.tournamentEndDate) {
+            startEl.textContent = 'завершён';
+            startEl.style.background = 'rgba(170,170,170,0.1)';
+            startEl.style.color = '#aaa';
+        } else if (now >= cfg.tournamentStartDate) {
+            startEl.textContent = 'идёт';
+            startEl.style.background = 'rgba(255,215,0,0.12)';
+            startEl.style.color = '#ffd700';
+        } else {
+            startEl.textContent = 'ожидание';
+            startEl.style.background = 'rgba(221,221,221,0.1)';
+            startEl.style.color = '#ddd';
+        }
+        
+        // Результаты
+        if (now >= cfg.tournamentEndDate) {
+            resEl.textContent = 'ГОТОВЫ';
+            resEl.style.background = 'rgba(255,215,0,0.12)';
+            resEl.style.color = '#ffd700';
+        } else {
+            resEl.textContent = 'ожидание';
+            resEl.style.background = 'rgba(221,221,221,0.1)';
+            resEl.style.color = '#ddd';
+        }
+    }
     
     // ================================================
     //         СИНХРОНИЗАЦИЯ СТАТИЧЕСКИХ ТЕКСТОВ
     // ================================================
-    function syncStaticTexts() {
+        function syncStaticTexts() {
         const cfg = TOURNAMENT_CONFIG;
         document.getElementById('tournamentNameLine1').textContent = cfg.tournamentNameLine1;
         document.getElementById('tournamentNameLine2').textContent = cfg.tournamentNameLine2;
@@ -1249,9 +1407,12 @@
     document.addEventListener('DOMContentLoaded', function() {
         const cfg = TOURNAMENT_CONFIG;
         syncStaticTexts();
+        updateHeroTagline();
+        
+        // Первичная установка
         updateButtonsByDate();
         updateHeroDateDisplay();
-		updateHeroTagline();
+        updateScheduleCompact();
         
         const daysEl = document.getElementById('days');
         const hoursEl = document.getElementById('hours');
@@ -1261,6 +1422,7 @@
         
         const timer = new CountdownTimer(cfg.tournamentStartDate, cfg.tournamentEndDate);
         timer.start(
+            // onTick — каждый кадр (мгновенное обновление)
             () => {
                 const remainingSeconds = timer.getRemainingTime();
                 if (remainingSeconds <= 0) return;
@@ -1268,13 +1430,27 @@
                 hoursEl.textContent = padZero(Math.floor((remainingSeconds % 86400) / 3600));
                 minutesEl.textContent = padZero(Math.floor((remainingSeconds % 3600) / 60));
                 secondsEl.textContent = padZero(remainingSeconds % 60);
+                
+                // Мгновенное обновление при каждом кадре
+                updateScheduleCompact();
+                updateButtonsByDate();
+                updateHeroDateDisplay();
             },
+            // onStart — турнир начался
             () => {
                 updateHeroDateDisplay();
+                updateButtonsByDate();
+                updateScheduleCompact();
                 if (timerWrapper.innerHTML.includes('winners-container')) return;
                 timerWrapper.innerHTML = `<div class="countdown" style="gap: 5px;"><div class="countdown__item" style="min-width: auto; padding: 12px 30px;"><span style="font-size: 1.5rem; font-weight: 800; color: var(--color-gold);">⚔️ ИДУТ БОИ ⚔️</span></div></div>`;
             },
-            () => renderWinners()
+            // onEnd — турнир завершён
+            () => {
+                renderWinners();
+                updateButtonsByDate();
+                updateScheduleCompact();
+                updateHeroDateDisplay();
+            }
         );
         
         document.getElementById('downloadModButton').href = cfg.modDownloadLink;
@@ -1332,6 +1508,10 @@
             </div>
             <div class="judge-note">⚡ Каждая спорная ситуация рассматривается судьёй индивидуально. <strong style="color: var(--color-primary);">Решение судьи — окончательное.</strong></div>
         `;
+		    setInterval(() => {
+            updateButtonsByDate();
+            updateHeroDateDisplay();
+        }, 1000);
     });
 </script>
 
