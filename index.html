@@ -628,6 +628,7 @@
         @media (max-width: 600px) {
             .container { padding: var(--spacing-md); }
             .header { flex-direction: column; text-align: center; }
+			.hero__tagline img { max-width: 200px !important; }
             .prize-header { text-align: center; }
             .prize-header__amount { font-size: 2.5rem; }
             .hero__title { font-size: 2rem; }
@@ -870,7 +871,7 @@
         tournamentNameLine2: 'ЗЕЛЁНЫХ ТРУСЕЛЕЙ',
         tournamentSubtitle: 'ВНУТРИКЛАНОВЫЙ ЗАМЕС',
         heroTagline: 'Пора выяснить, чей взвод в Группировке «ALAYA» самый скилловый!',
-        finalCallText: 'Пора в бой! Вперёд, к новым триумфам! 💪🔥',
+        finalCallText: 'Вперёд, к новым триумфам! 💪🔥',
         totalPrize: 82500,
         prizes: { first: 30000, second: 22500, third: 15000, hunter: 15000 },
         gamePath: 'C:\\Games\\Tanki',
@@ -1133,6 +1134,7 @@
         confettiControl.style.display = 'block';
         startConfetti();
         setupWinnersObserver();
+		updateHeroTagline();
     }
 
     // ================================================
@@ -1151,32 +1153,61 @@
         tournamentDateEl.textContent = (now >= cfg.tournamentStartDate) ? '🔥 ТУРНИР В РАЗГАРЕ! БОЛЕЙ ЗА НАШИХ! 🔥' : formatDate(cfg.tournamentStartDate);
     }
 
-    // ================================================
-    //            ОБНОВЛЕНИЕ КНОПОК ПО ДАТЕ
-    // ================================================
-    function updateButtonsByDate() {
-        const now = new Date();
-        const cfg = TOURNAMENT_CONFIG;
-        const heroButton = document.getElementById('registerButton');
-        const finalButton = document.getElementById('finalRegisterButton');
-        const btnTexts = cfg.buttonTexts;
-        const isRegistrationClosed = now >= cfg.registrationEndDate || now >= cfg.tournamentStartDate || now >= cfg.tournamentEndDate;
-        if (isRegistrationClosed) {
-            heroButton.textContent = btnTexts.heroInactive;
-            finalButton.textContent = btnTexts.finalInactive;
-            heroButton.classList.add('button--disabled');
-            finalButton.classList.add('button--disabled');
-            heroButton.removeAttribute('href');
-            finalButton.removeAttribute('href');
-        } else {
-            heroButton.textContent = btnTexts.heroActive;
-            finalButton.textContent = btnTexts.finalActive;
-            heroButton.classList.remove('button--disabled');
-            finalButton.classList.remove('button--disabled');
-            heroButton.href = cfg.registerLink;
-            finalButton.href = cfg.registerLink;
-        }
-    }
+	// ================================================
+	//            ОБНОВЛЕНИЕ КНОПОК ПО ДАТЕ
+	// ================================================
+	function updateButtonsByDate() {
+		const now = new Date();
+		const cfg = TOURNAMENT_CONFIG;
+		const heroButton = document.getElementById('registerButton');
+		const finalButton = document.getElementById('finalRegisterButton');
+		const btnTexts = cfg.buttonTexts;
+		const isRegistrationClosed = now >= cfg.registrationEndDate || now >= cfg.tournamentStartDate || now >= cfg.tournamentEndDate;
+		
+		// Если турнир завершён — скрываем кнопки полностью
+		if (now >= cfg.tournamentEndDate) {
+			heroButton.style.display = 'none';
+			finalButton.style.display = 'none';
+			return;
+		}
+		
+		// Иначе показываем и настраиваем
+		heroButton.style.display = 'inline-block';
+		finalButton.style.display = 'inline-block';
+		
+		if (isRegistrationClosed) {
+			heroButton.textContent = btnTexts.heroInactive;
+			finalButton.textContent = btnTexts.finalInactive;
+			heroButton.classList.add('button--disabled');
+			finalButton.classList.add('button--disabled');
+			heroButton.removeAttribute('href');
+			finalButton.removeAttribute('href');
+		} else {
+			heroButton.textContent = btnTexts.heroActive;
+			finalButton.textContent = btnTexts.finalActive;
+			heroButton.classList.remove('button--disabled');
+			finalButton.classList.remove('button--disabled');
+			heroButton.href = cfg.registerLink;
+			finalButton.href = cfg.registerLink;
+		}
+	}
+
+	// ================================================
+	//         ОБНОВЛЕНИЕ ТЕКСТА ПОД HERO-КНОПКОЙ
+	// ================================================
+	function updateHeroTagline() {
+		const now = new Date();
+		const cfg = TOURNAMENT_CONFIG;
+		const heroTagline = document.getElementById('heroTagline');
+		
+		if (now >= cfg.tournamentEndDate) {
+			// Заменяем текст на GIF
+			heroTagline.innerHTML = `<img src="images/mem/sigma.gif" alt="Sigma" style="max-width: 300px; width: 100%; height: auto; border-radius: 8px; margin-top: 20px;">`;
+		} else {
+			// Обычный текст
+			heroTagline.textContent = cfg.heroTagline;
+		}
+	}
     
     // ================================================
     //         СИНХРОНИЗАЦИЯ СТАТИЧЕСКИХ ТЕКСТОВ
@@ -1186,7 +1217,6 @@
         document.getElementById('tournamentNameLine1').textContent = cfg.tournamentNameLine1;
         document.getElementById('tournamentNameLine2').textContent = cfg.tournamentNameLine2;
         document.getElementById('tournamentSubtitle').textContent = cfg.tournamentSubtitle;
-        document.getElementById('heroTagline').textContent = cfg.heroTagline;
         document.getElementById('finalCallText').textContent = cfg.finalCallText;
         document.getElementById('chuckQuote').innerHTML = cfg.chuckQuote;
         document.getElementById('sponsorName').textContent = cfg.sponsorName;
@@ -1217,6 +1247,7 @@
         syncStaticTexts();
         updateButtonsByDate();
         updateHeroDateDisplay();
+		updateHeroTagline();
         
         const daysEl = document.getElementById('days');
         const hoursEl = document.getElementById('hours');
@@ -1259,7 +1290,7 @@
         
         document.getElementById('rulesGrid').innerHTML = `
             <div class="card--rule"><h3 class="card__title">⚙️ ФОРМАТ</h3><ul class="list"><li class="list__item">2 этапа: <span class="highlight">Групповой</span> и <span class="highlight">Плей-офф</span></li><li class="list__item">Режим: <span class="highlight">только Стандартный бой</span> (Штурм, Встречный бой и прочие запрещены)</li><li class="list__item">Состав взвода: строго <span class="highlight">1 ТТ + 1 СТ + 1 ПТ</span></li><li class="list__item">Ограничения по количеству боёв на одном танке в рамках каждого этапа</li></ul></div>
-            <div class="card--rule"><h3 class="card__title">🎲 ПИК ТЕХНИКИ</h3><ul class="list"><li class="list__item">Строгий набор техники для каждого этапа</li><li class="list__item">Определяется путём <span class="highlight">жеребьёвки</span> перед матчем</li><li class="list__item">Участники разбиты на <span class="highlight">3 корзины</span> по уровню игры</li><li class="list__item">Сбалансированные команды формируются жеребьёвкой</li></ul></div>
+            <div class="card--rule"><h3 class="card__title">🎲 РАСПРЕДЕЛЕНИЕ</h3><ul class="list"><li class="list__item">Строгий набор техники для каждого этапа</li><li class="list__item">Определяется путём <span class="highlight">жеребьёвки</span> перед матчем</li><li class="list__item">Участники разбиты на <span class="highlight">3 корзины</span> по уровню игры</li><li class="list__item">Сбалансированные команды формируются жеребьёвкой</li></ul></div>
             <div class="card--rule"><h3 class="card__title">🎯 ФОРМУЛА ОЧКОВ</h3><ul class="list"><li class="list__item"><span class="highlight">Классический «Чак»:</span></li><li class="list__item">📊 1 урон = ${cfg.formula.damage} очко</li><li class="list__item">💀 1 фраг = ${cfg.formula.frag} очков</li><li class="list__item">🏁 1 победа = ${cfg.formula.win} очков</li></ul></div>
         `;
         
